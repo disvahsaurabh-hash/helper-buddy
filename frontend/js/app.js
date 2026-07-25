@@ -11,7 +11,7 @@ async function registerUser(){
 
 
     const response = await fetch(
-        "http://localhost:5000/api/auth/register",
+        "https://helper-buddy.onrender.com/api/auth/register",
         {
             method:"POST",
 
@@ -51,7 +51,7 @@ async function loginUser(){
 
 
     const response = await fetch(
-        "http://localhost:5000/api/auth/login",
+        "https://helper-buddy.onrender.com/api/auth/login",
         {
 
             method:"POST",
@@ -203,7 +203,7 @@ async function createHelperProfile(){
 
     const response = await fetch(
 
-        "http://localhost:5000/api/helpers/create",
+        "https://helper-buddy.onrender.com/api/helpers/create",
 
         {
             method:"POST",
@@ -249,7 +249,7 @@ async function searchHelpers(){
 
 
     const url =
-    `http://localhost:5000/api/helpers/search?profession=${profession}&city=${city}`;
+    `https://helper-buddy.onrender.com/api/helpers/search?profession=${profession}&city=${city}`;
 
 
 
@@ -300,7 +300,7 @@ results.innerHTML += `
 
 <img
 
-src="http://localhost:5000/uploads/${helper.photo}"
+src="https://helper-buddy.onrender.com/uploads/${helper.photo}"
 
 class="helper-image"
 
@@ -397,7 +397,7 @@ async function loadHelperProfile(){
     const response =
     await fetch(
 
-        "http://localhost:5000/api/helpers/" + id
+        "https://helper-buddy.onrender.com/api/helpers/" + id
 
     );
 
@@ -418,7 +418,7 @@ async function loadHelperProfile(){
 <div class="profile-photo-section">
 
 
-<img src="http://localhost:5000/uploads/${helper.photo}">
+<img src="https://helper-buddy.onrender.com/uploads/${helper.photo}">
 
 
 <h2>
