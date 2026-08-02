@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LocalHelper | Admin Dashboard</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="admin-container">
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+
+<div class="admin-logo">
+
+<h2>LocalHelper</h2>
+
+<p>Admin Panel</p>
+
+</div>
+
+
+<ul class="sidebar-menu">
+
+
+<li>
+<a href="#" onclick="showSection('dashboard')">
+🏠 Dashboard
+</a>
+</li>
+
+
+<li>
+<a href="#" onclick="showSection('customers')">
+👥 Customers
+</a>
+</li>
+
+
+<li>
+<a href="#" onclick="showSection('helpers')">
+🔧 Helpers
+</a>
+</li>
+
+
+<li>
+<a href="#" onclick="showSection('reports')">
+📊 Reports
+</a>
+</li>
+
+
+<li>
+<a href="#" id="logoutBtn">
+🚪 Logout
+</a>
+</li>
+
+
+</ul>
+
+
+</aside>
+
+
+
+
+<!-- MAIN CONTENT -->
+
+
+<main class="admin-main">
+
+
+<div class="admin-header">
+
+<h1>Welcome Admin 👋</h1>
+
+<p>Manage LocalHelper from one place.</p>
+
+</div>
+
+
+
+
+
+<!-- DASHBOARD SECTION -->
+
+
+<section id="dashboardSection">
+
+
+<div class="dashboard-cards">
+
+
+<div class="dashboard-card">
+
+<h3>Total Customers</h3>
+
+<h1 id="customers">0</h1>
+
+</div>
+
+
+
+<div class="dashboard-card">
+
+<h3>Total Helpers</h3>
+
+<h1 id="helpers">0</h1>
+
+</div>
+
+
+
+
+<div class="dashboard-card">
+
+<h3>Pending Helpers</h3>
+
+<h1 id="pending">0</h1>
+
+</div>
+
+
+
+
+<div class="dashboard-card">
+
+<h3>Approved Helpers</h3>
+
+<h1 id="approved">0</h1>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+<!-- ================= CUSTOMERS SECTION ================= -->
+
+<section id="customersSection" style="display:none;">
+
+
+<div class="section-title">
+
+<h2>Manage Customers</h2>
+
+
+<input
+type="text"
+id="customerSearch"
+placeholder="Search Customer..."
+>
+
+
+</div>
+
+
+
+<table class="admin-table">
+
+
+<thead>
+
+<tr>
+
+<th>Name</th>
+
+<th>Email</th>
+
+<th>Role</th>
+
+<th>Joined</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+
+
+<tbody id="customerTable">
+
+
+</tbody>
+
+
+</table>
+
+
+</section>
+
+
+
+
+
+<!-- ================= HELPERS SECTION ================= -->
+
+
+<section id="helpersSection" style="display:none;">
+
+
+<div class="section-title">
+
+
+<h2>Manage Helpers</h2>
+
+
+<input
+type="text"
+id="helperSearch"
+placeholder="Search Helper..."
+>
+
+
+</div>
+
+
+
+
+<table class="admin-table">
+
+
+<thead>
+
+
+<tr>
+
+
+<th>Photo</th>
+
+<th>Name</th>
+
+<th>Profession</th>
+
+<th>City</th>
+
+<th>Phone</th>
+
+<th>Experience</th>
+
+<th>Action</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+<tbody id="helperTable">
+
+
+</tbody>
+
+
+
+</table>
+
+
+</section>
+
+<!-- ================= REPORTS SECTION ================= -->
+
+<section id="reportsSection" style="display:none;">
+
+
+<h2>Reports</h2>
+
+
+<div class="dashboard-cards">
+
+
+<div class="dashboard-card">
+
+<h3>Total Registered Users</h3>
+
+<h1 id="totalUsers">0</h1>
+
+</div>
+
+
+
+<div class="dashboard-card">
+
+<h3>Total Cities</h3>
+
+<h1 id="totalCities">0</h1>
+
+</div>
+
+
+
+<div class="dashboard-card">
+
+<h3>Total Professions</h3>
+
+<h1 id="totalProfessions">0</h1>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+</main>
+
+
+</div>
+<script>
+
+
+// ================= ADMIN LOGIN CHECK =================
+
+if(!localStorage.getItem("adminToken")){
+
+    window.location.href="admin-login.html";
+
+}
+
+
+
+// ================= LOGOUT =================
+
+
+document.getElementById("logoutBtn").onclick=function(){
+
+    localStorage.removeItem("adminToken");
+
+    window.location.href="admin-login.html";
+
+};
+
+
+
+
+// ================= SECTION SWITCH =================
+
+
+function showSection(section){
+
+
+document.getElementById("dashboardSection").style.display="none";
+
+document.getElementById("customersSection").style.display="none";
+
+document.getElementById("helpersSection").style.display="none";
+
+document.getElementById("reportsSection").style.display="none";
+
+
+
+
+if(section==="dashboard"){
+
+document.getElementById("dashboardSection").style.display="block";
+
+}
+
+
+
+
+if(section==="customers"){
+
+document.getElementById("customersSection").style.display="block";
+
+loadCustomers();
+
+}
+
+
+
+
+
+if(section==="helpers"){
+
+document.getElementById("helpersSection").style.display="block";
+
+loadHelpers();
+
+}
+
+
+
+
+if(section==="reports"){
+
+document.getElementById("reportsSection").style.display="block";
+
+}
+
+
+}
+
+
+
+
+
+
+// ================= LOAD STATS =================
+
+
+async function loadStats(){
+
+
+try{
+
+
+const response = await fetch(
+"http://localhost:5000/api/admin/stats"
+);
+
+
+
+const data = await response.json();
+
+
+
+if(data.success){
+
+
+document.getElementById("customers").innerHTML =
+data.totalCustomers;
+
+
+document.getElementById("helpers").innerHTML =
+data.totalHelpers;
+
+
+}
+
+
+}
+
+catch(error){
+
+console.log(error);
+
+}
+
+
+}
+
+
+
+
+
+
+// ================= LOAD HELPERS =================
+
+
+async function loadHelpers(){
+
+
+try{
+
+
+const response = await fetch(
+"http://localhost:5000/api/admin/helpers"
+);
+
+
+
+const data = await response.json();
+
+
+
+let html="";
+
+
+
+data.helpers.forEach(helper=>{
+
+
+html += `
+
+
+<tr>
+
+
+<td>
+
+<img src="http://localhost:5000/uploads/${helper.photo}">
+
+</td>
+
+
+<td>${helper.name}</td>
+
+
+<td>${helper.profession}</td>
+
+
+<td>${helper.city}</td>
+
+
+<td>${helper.phone}</td>
+
+
+<td>${helper.experience}</td>
+
+
+<td>
+
+<button onclick="deleteHelper('${helper._id}')">
+
+Delete
+
+</button>
+
+
+</td>
+
+
+</tr>
+
+
+`;
+
+
+});
+
+
+
+document.getElementById("helperTable").innerHTML = html;
+
+
+}
+
+
+catch(error){
+
+console.log(error);
+
+}
+
+
+}
+
+
+
+
+
+
+// ================= DELETE HELPER =================
+
+
+async function deleteHelper(id){
+
+
+if(!confirm("Delete this helper?"))
+
+return;
+
+
+
+const response = await fetch(
+
+`http://localhost:5000/api/admin/helper/${id}`,
+
+{
+
+method:"DELETE"
+
+}
+
+);
+
+
+
+const data = await response.json();
+
+
+
+if(data.success){
+
+
+alert("Helper deleted successfully");
+
+
+loadHelpers();
+
+loadStats();
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+// ================= LOAD CUSTOMERS =================
+
+
+async function loadCustomers(){
+
+
+try{
+
+
+const response = await fetch(
+
+"http://localhost:5000/api/admin/customers"
+
+);
+
+
+
+const data = await response.json();
+
+
+
+let html="";
+
+
+
+data.customers.forEach(customer=>{
+
+
+html += `
+
+
+<tr>
+
+
+<td>${customer.name}</td>
+
+
+<td>${customer.email}</td>
+
+
+<td>${customer.role}</td>
+
+
+<td>
+
+${new Date(customer.createdAt).toLocaleDateString()}
+
+</td>
+
+
+<td>
+
+
+<button onclick="deleteCustomer('${customer._id}')">
+
+Delete
+
+</button>
+
+
+</td>
+
+
+</tr>
+
+
+`;
+
+
+});
+
+
+
+document.getElementById("customerTable").innerHTML = html;
+
+
+}
+
+
+
+catch(error){
+
+console.log(error);
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+// ================= DELETE CUSTOMER =================
+
+
+async function deleteCustomer(id){
+
+
+if(!confirm("Delete this customer?"))
+
+return;
+
+
+
+const response = await fetch(
+
+`http://localhost:5000/api/admin/customer/${id}`,
+
+{
+
+method:"DELETE"
+
+}
+
+);
+
+
+
+const data = await response.json();
+
+
+
+if(data.success){
+
+
+alert("Customer deleted successfully");
+
+
+loadCustomers();
+
+loadStats();
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+// ================= START =================
+
+
+loadStats();
+
+
+</script>
+
+
+</body>
+
+</html>

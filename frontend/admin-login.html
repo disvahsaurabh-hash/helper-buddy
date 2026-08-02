@@ -1,0 +1,87 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | LocalHelper</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="login-container">
+
+    <h2>Admin Login</h2>
+
+    <form id="adminLoginForm">
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter Admin Email"
+            required
+        >
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter Password"
+            required
+        >
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+</div>
+
+<script>
+
+const form = document.getElementById("adminLoginForm");
+
+form.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const response = await fetch("http://localhost:5000/api/admin/login", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            email,
+            password
+        })
+
+    });
+
+    const data = await response.json();
+
+    if(data.success){
+
+        localStorage.setItem("adminToken", data.token);
+
+        alert("Admin Login Successful");
+
+        window.location.href = "admin-dashboard.html";
+
+    }else{
+
+        alert(data.message);
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
