@@ -1,222 +1,129 @@
+
 <!DOCTYPE html>
 <html>
-
 <head>
-
-<title>
-Register | Local Helper
-</title>
-
-<link rel="stylesheet" href="css/style.css">
-
+    <title>Register | Local Helper</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 
 <body>
 
-
 <nav class="navbar">
+    <div class="logo">
+        Local <span>Helper</span>
+    </div>
 
-
-<div class="logo">
-
-Local <span>Helper</span>
-
-</div>
-
-
-
-<ul class="nav-links">
-
-
-<li>
-<a href="index.html">
-Home
-</a>
-</li>
-
-
-<li>
-<a href="search.html">
-Search Helpers
-</a>
-</li>
-
-
-<li>
-<a href="register.html">
-Become Helper
-</a>
-</li>
-
-
-<li>
-<a href="login.html">
-Login
-</a>
-</li>
-
-
-</ul>
-
-
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="search.html">Search Helpers</a></li>
+        <li><a href="register.html">Become Helper</a></li>
+        <li><a href="login.html">Login</a></li>
+    </ul>
 </nav>
-
-
-
 
 <section class="register-section">
 
-
-<div class="register-card">
-
-
-
-<div class="register-banner">
-
-
-<h1>
-Join Local Helper 🚀
-</h1>
-
-
-<p>
-Connect with trusted local services or grow your business by helping others.
-</p>
-
-
-
-<div class="register-icon">
-
-🤝
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<div class="register-form">
-
-
-
-<h2>
-Create Account
-</h2>
-
-
-
-<p class="register-subtitle">
-Register to continue
-</p>
-
-
-
-
-<input
-id="name"
-type="text"
-placeholder="Full Name">
-
-
-
-
-
-<input
-id="email"
-type="email"
-placeholder="Email Address">
-
-
-
-
-
-<input
-id="password"
-type="password"
-placeholder="Password">
-
-
-
-
-
-<select id="role">
-
-
-<option value="">
-Select Account Type
-</option>
-
-
-<option value="customer">
-Customer
-</option>
-
-
-<option value="helper">
-Helper
-</option>
-
-
-</select>
-
-
-
-
-
-<button onclick="registerUser()">
-
-Create Account
-
-</button>
-
-
-
-
-<p class="login-text">
-
-Already have an account?
-
-<a href="login.html">
-Login
-</a>
-
-
-</p>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
+    <div class="register-card">
+
+        <div class="register-banner">
+            <h1>Join Local Helper 🚀</h1>
+
+            <p>
+                Connect with trusted local services or grow
+                your business by helping others.
+            </p>
+
+            <div class="register-icon">🤝</div>
+        </div>
+
+        <div class="register-form">
+
+            <h2>Create Account</h2>
+
+            <p class="register-subtitle">
+                Register to continue
+            </p>
+
+            <input
+                id="name"
+                type="text"
+                placeholder="Full Name"
+                required
+            >
+
+            <input
+                id="email"
+                type="email"
+                placeholder="Gmail Address"
+                required
+            >
+
+            <input
+                id="password"
+                type="password"
+                placeholder="Password (Minimum 8 characters)"
+                required
+            >
+
+            <select id="role" required>
+                <option value="">Select Account Type</option>
+                <option value="customer">Customer</option>
+                <option value="helper">Helper</option>
+            </select>
+
+            <button
+                type="button"
+                id="sendOtpBtn"
+                onclick="sendRegistrationOTP()"
+            >
+                Send Gmail OTP
+            </button>
+
+            <div id="otpSection" style="display:none; margin-top:20px;">
+
+                <p>
+                    Enter the 6-digit OTP sent to your Gmail.
+                </p>
+
+                <input
+                    id="otp"
+                    type="text"
+                    placeholder="Enter 6-digit OTP"
+                    maxlength="6"
+                    inputmode="numeric"
+                >
+
+                <button
+                    type="button"
+                    onclick="verifyRegistrationOTP()"
+                >
+                    Verify & Create Account
+                </button>
+
+                <button
+                    type="button"
+                    onclick="sendRegistrationOTP()"
+                    style="margin-top:10px;"
+                >
+                    Resend OTP
+                </button>
+
+            </div>
+
+            <p class="login-text">
+                Already have an account?
+                <a href="login.html">Login</a>
+            </p>
+
+        </div>
+    </div>
 </section>
 
-
-
+<footer>
+    <p>© 2026 Local Helper | Right Help. Right Now.</p>
+</footer>
 
 <script src="js/app.js"></script>
 
-
-
-
-<footer>
-
-<p>
-© 2026 Local Helper | Right Help. Right Now.
-</p>
-
-</footer>
-
-
 </body>
-
 </html>
